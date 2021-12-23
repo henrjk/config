@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Packages
+set -eux
+
+if [[ $(uname) = 'Darwin' ]]; then
+
+  which brew || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+  brew update
+
+  which k9s || brew install k9s
+  # which kind || brew install kind
+
+else
+  echo "NYI: ! Remember to update install script to installing extra tools on this platform"
+fi
+
+echo "Done."

@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# Packages
+set -eux
+
+if [[ $(uname) = 'Darwin' ]]; then
+
+  which brew || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+  brew update
+
+ 
+  which nvim || brew install neovim
+
+  which go || (
+    curl -O https://dl.google.com/go/go1.13.darwin-amd64.tar.gz
+    sudo tar -C /usr/local -xzf go1.13.darwin-amd64.tar.gz
+    rm go1.13.darwin-amd64.tar.gz
+  )
+
+  which 2fa || /usr/local/go/bin/go get -u rsc.io/2fa
+
+  which pwgen || brew install pwgen
+
+  which mkcert || brew install mkcert
+
+  # Recursively search for PATTERN in PATH. Like grep or ack, but faster.
+  # socat does something similar according to https://github.com/hanslub42/rlwrap
+  which rlwrap || brew install rlwrap
+
+  # yet another go interpreter
+  which yaegi || /usr/local/go/bin/go get -u github.com/containous/yaegi/cmd/yaegi
+
+  [[ $SHELL = "/bin/zsh" ]] || (
+    brew install zsh;
+    sudo chsh -s /bin/zsh `whoami`
+  )
+
+else
+
+  sudo apt-get update -y
+
+  sudo apt-get install -y software-properties-common
+
+  which zsh || sudo apt-get install -y zsh
+
+  which nvim || (
+    sudo add-apt-repository ppa:neovim-ppa/stable;
+    sudo apt-get update -y;
+    sudo apt-get install -y neovim
+  )
+
+  which go || (
+    curl -O https://dl.google.com/go/go1.13.linux-amd64.tar.gz
+    sudo tar -C /usr/local -xzf go1.13.linux-amd64.tar.gz
+    rm go1.13.linux-amd64.tar.gz
+  )
+
+  which 2fa || /usr/local/go/bin/go get -u rsc.io/2fa
+
+  which yaegi || /usr/local/go/bin/go get -u github.com/containous/yaegi/cmd/yaegi
+fi
+
+
+if [[ $(uname) = 'Darwin' ]]; then
+  echo "ln -sf /Applications/Sublime Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/sublime"
+  ln -sf "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/sublime
+else
+  echo "ln -sf /opt/sublime_text/sublime_text /usr/local/bin/sublime"
+  ln -sf /opt/sublime_text/sublime_text /usr/local/bin/sublime
+fi
+
+echo "Done installing msauter favorites."

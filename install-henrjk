@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Packages
+set -eux
+
+if [[ $(uname) = 'Darwin' ]]; then
+
+  which brew || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+  brew update
+
+  brew install bash # the macos one is not usable
+
+  # tig - text-mode interface for Git - use 'h' to get help
+  which tig || brew install tig
+
+  # a cat(1) clone with syntax highlighting and Git integration
+  which bat || brew install bat
+
+  # a modern replacement for ls
+  which exa || brew install exa
+  
+  # fd is a simple, fast and user-friendly alternative to find(1).
+  which fd || brew install fd
+
+  # Multipurpose relay (SOcket CAT): 
+  which socat || brew install socat
+
+  # encrypted file editor with AWS KMS, GCP KMS, Azure Key Vault, age, and GPG support
+  which sops || brew install sops
+
+  # ngrok - tunnel local ports to public URLs and inspect traffic
+  which ngrok || brew install ngrok
+  
+
+else
+  echo "NYI: ! Remember to update install script to installing extra tools on this platform"
+fi
+
+echo "Done."
