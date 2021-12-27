@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Packages
+set -eux
+
+# Assumes you already ran the install script
+
+# If things don't work https://binx.io/blog/2019/04/12/installing-pyenv-on-macos/ could be valuable.
+
+if [[ $(uname) = 'Darwin' ]]; then
+  if ! brew doctor check_xcode_license_approved check_xcode_minimum_version check_xcode_prefix_exists check_xcode_select_path check_xcode_up_to_date; then
+    echo "A matching xcode CLI installed is needed for pyenv to compile python versions." >&2
+    echo "See https://docs.brew.sh/Installation and https://github.com/pyenv/pyenv/wiki"  >&2
+    exit 1
+  fi
+  # install
+  echo "Installing dependencies required when pyenv installs python versions" >&2
+  brew install openssl readline sqlite3 xz zlib
+  echo "Installing pyenv" >&2
+  brew install pyenv
+elif [[ $(uname) = 'Linux' ]]; then
+  echo "NYI: May want to consider using brew on Linux as there appears to be no package for pyenv" >&2
+  : 'Links of interest:
+  - https://gist.github.com/luzfcb/1a7f64adf5d12c2d357d0b4319fe9dcd
+  - [Installing Pyenv on Ubuntu 20.04. what is Pyenv? | by Marine.ss | Medium](https://medium.com/@marine.ss/installing-pyenv-on-ubuntu-20-04-c3a609a20aa2)
+  - could also be that there is a better way to manage this on Linux
+  '
+  exit 2
+  sudo apt-get update; sudo apt-get install make build-essential libssl-dev zlib1g-dev \
+    libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+    libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+
+else
+  echo "NYI: Remember to update install script tools on this platform uname=$(uname)" >&2
+  exit 1
+fi
+
+# Install some of the latest versions: .. pyenv does not have a latest it seems
+pyenv install 3.8.12
+pyenv install 3.9.7
+

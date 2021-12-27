@@ -11,9 +11,6 @@ if [[ $(uname) = 'Darwin' ]]; then
 
   brew install bash # the macos one is not usable
 
-  # tig - text-mode interface for Git - use 'h' to get help
-  which tig || brew install tig
-
   # a cat(1) clone with syntax highlighting and Git integration
   which bat || brew install bat
 
