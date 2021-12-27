@@ -5,14 +5,18 @@ set -eux
 
 if [[ $(uname) = 'Darwin' ]]; then
 
-  which brew || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  which brew || (
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    brew update
+  )
 
-  brew update
 
-  which git || {
-    brew install git git-lfs
-  }
-  
+  which git || brew install git
+
+  which git-lfs || brew install git-lfs
+
+  # tig - text-mode interface for Git - use 'h' to get help
+  which tig || brew install tig
 
   # Recursively search for PATTERN in PATH. Like grep or ack, but faster.
   which ag || brew install the_silver_searcher
@@ -22,11 +26,13 @@ if [[ $(uname) = 'Darwin' ]]; then
   which jq || brew install jq
 
   which bat || brew install bat
-  
+
   [[ $SHELL = "/bin/zsh" ]] || (
     brew install zsh;
     sudo chsh -s /bin/zsh `whoami`
   )
+
+  which direnv || brew install direnv
 
 else
 
@@ -34,7 +40,9 @@ else
 
   sudo apt-get install -y software-properties-common
 
-  which git || sudo apt-get install -y git
+  which git || sudo apt-get install -y git git-lfs
+  # todo test that the above works with git-lfs
+  which git || sudo apt-get install -y tig
 
   which ag || (
     sudo apt-get install -y silversearcher-ag;
@@ -46,6 +54,8 @@ else
   which zsh || sudo apt-get install -y zsh
 
   which jq || sudo apt-get install jq
+
+  which direnv || (echo "please install a recent version of direnv" && exit 12 ) #
 fi
 
 # Symlinks
