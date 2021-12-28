@@ -44,3 +44,6 @@ if ! pyenv versions --bare | grep -q 3.9.7 ; then
   pyenv install 3.9.7
 fi
 
+
+# TODO: consider also upgrading pip for each version as described
+# at https://www.digitalocean.com/community/tutorials/how-to-manage-python-with-pyenv-and-direnv
