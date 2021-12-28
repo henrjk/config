@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Packages
+set -eux
+
+# From https://askubuntu.com/a/899878
+
+# t=$(mktemp) &&
+# wget 'http://example.com/install.sh' -qO "$t" &&
+# if sha256sum "$t" | grep -Eo '^\w+' | cmp -s my-sha256.txt
+#     then bash "$t"
+#     else echo FAIL
+# fi
+# rm "$t"
+
+# nvm docs say to install this like so:
+# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+# above could be used to have a list of sha256 files to verify
+
+# https://hackerone.com/reports/1166535 has a good discussion
+
+# current release is 5 days old version v039.1
+# Choosing brew install assuming greater protection against someone slipping in a malicious nvm.
+
+# which not working with nvm
+if nvm --version 2>&1; then
+    exit
+fi
+
+
+if [[ $(uname) = 'Darwin' ]]; then
+  brew install nvm
+else
+  echo "NYI: ! Remember to update this install script to installing extra tools on this platform"
+  exit 2
+fi
+
+echo "Snippet already in zsh/sourced/nvm.zsh:"
+echo "---"
+cat zsh/sourced/nvm.zsh
+echo "---"
+echo "Source it or open a new terminal"

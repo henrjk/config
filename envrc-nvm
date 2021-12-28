@@ -1,0 +1,19 @@
+#!/bin/bash
+set -eu
+
+# 5: nvm: command not found
+# if ! nvm --version > /dev/null ; then
+if ! [ -s "$NVM_DIR/nvm.sh" ] ; then
+    echo "ERROR: nvm not installed. Install script is install-nvm"
+    exit 2
+fi
+
+VERSION=${1-<version>  # e.g. use node 16}
+
+cat << SNIPPET
+# nvm basics are already configured at zsh/sourced/nvm.zsh
+# -- snippet to add into an .envrc file follows
+export NODE_VERSIONS="\$NVM_DIR/versions/node"
+export NODE_VERSION_PREFIX='v'
+use node $VERSION
+SNIPPET

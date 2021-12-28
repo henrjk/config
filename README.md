@@ -125,3 +125,17 @@ To install another version of python use
 To get the matching direnv `.envrc` snippet use `./envrc-pyenv`. 
 This also has a tip on how to manage the python version for 
 a certain dir.  
+
+## Installing node versions
+
+nvm can be installed with `./install-nvm`.
+
+This script also adds `zsh/sourced/nvm.zsh` which is sourced by `~/.zshrc`.
+This is expected to be fast enough to not need to delay loading it.
+
+To install a specific node version use nvm for example:
+- `nvm ls-remote --lts`
+- `nvm install -b 16` where `-b` is for binary install.
+
+To get the matching direnv `.envrc` snippet to select that version
+use `./envrc-nvm <version>`. 
