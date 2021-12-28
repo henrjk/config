@@ -16,11 +16,11 @@ if [[ $(uname) = 'Darwin' ]]; then
 
   # a modern replacement for ls
   which exa || brew install exa
-  
+
   # fd is a simple, fast and user-friendly alternative to find(1).
   which fd || brew install fd
 
-  # Multipurpose relay (SOcket CAT): 
+  # Multipurpose relay (SOcket CAT):
   which socat || brew install socat
 
   # encrypted file editor with AWS KMS, GCP KMS, Azure Key Vault, age, and GPG support
@@ -28,10 +28,10 @@ if [[ $(uname) = 'Darwin' ]]; then
 
   # ngrok - tunnel local ports to public URLs and inspect traffic
   which ngrok || brew install ngrok
-  
+
 
 else
-  echo "NYI: ! Remember to update install script to installing extra tools on this platform"
+  echo "NYI: ! Remember to update this install script to installing extra tools on this platform"
 fi
 
 echo "Done."

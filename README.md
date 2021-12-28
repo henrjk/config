@@ -28,6 +28,8 @@ Also it typically mean that `.envrc` scripts need to be adjusted.
 Note that in the context of these scripts the functions in the 
 [direnv standard lib](https://github.com/direnv/direnv#the-stdlib) that makes this easier.
 
+This seems like a major issue limiting the usefulness of multiple level of .envrc files:
+[variables unset when going down a directory if there's a .envrc in the destination · Issue #772 · direnv/direnv](https://github.com/direnv/direnv/issues/772)
 ### direnv and tmux
 
 There appear to be problems when using tmux with direnv.
