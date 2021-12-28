@@ -1,19 +1,38 @@
 #!/bin/bash
 
-# Packages
-set -eux
+set -eu
+
+# This script assumes the install script was done first!
 
 if [[ $(uname) = 'Darwin' ]]; then
 
-  which brew || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  if ! which -s docker; then
+    echo "Please install docker and set it up so that it can run without root." >&2
+    echo "-> Typically this is done by installing docker for desktop for mac:" >&2
+    echo "-> https://docs.docker.com/desktop/mac/install/" >&2
+    exit 1
+  fi
+  if  ! docker info > /dev/null 2>&1; then
+    echo "This script requires docker, and it isn't running - please start docker and try again!"
+    exit 2
+  fi
+  # Not sure whether the above will fail if docker would require sudo. If not please add this to the script
 
+  set -x
   brew update
+  set +x
+  export HOMEBREW_NO_AUTO_UPDATE=1
 
-  which k9s || brew install k9s
-  # which kind || brew install kind
+  (which kind && kind version) || brew install kind
+
+  which kubectl || brew install kubectl-cli
+
+  (which helm && helm version --short) || brew install helm
+
+  (which k9s && k9s version --short) || brew install k9s
 
 else
-  echo "NYI: ! Remember to update install script to installing extra tools on this platform"
+  echo "NYI: ! Remember to update this install script to installing extra tools on this platform"
 fi
 
 echo "Done."
