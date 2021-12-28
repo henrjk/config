@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if ! pyenv --version > /dev/null ; then
+    echo "ERROR: pyenv not installed. Install script is install-pyenv"
+    exit 1
+fi
+
+cat << 'SNIPPET'
+# -- snippet to add into an .envrc file follows
+export PYENV_ROOT="$HOME/.pyenv"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+
+# -- Expected usage is to use `pyenv local` which creates a .python-version
+#    file to determine a python version.
+# -- Alternatively you can use the following in your .envrx
+export PYENV_VERSION=<version>
+SNIPPET

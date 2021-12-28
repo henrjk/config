@@ -31,11 +31,16 @@ elif [[ $(uname) = 'Linux' ]]; then
     libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
 else
-  echo "NYI: Remember to update install script tools on this platform uname=$(uname)" >&2
+  echo "NYI: Remember to update this install script tools on this platform uname=$(uname)" >&2
   exit 1
 fi
 
 # Install some of the latest versions: .. pyenv does not have a latest it seems
-pyenv install 3.8.12
-pyenv install 3.9.7
+# pyenv install -l lists available versions
+if ! pyenv versions --bare | grep -q 3.8.12 ; then
+  pyenv install 3.8.12
+fi
+if ! pyenv versions --bare | grep -q 3.9.7 ; then
+  pyenv install 3.9.7
+fi
 

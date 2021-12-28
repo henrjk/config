@@ -108,7 +108,20 @@ kept up to date.s
 
 To install a specific go version use `./install-go-go <version>`.
 This installs `go<version>` which should be available in the path.
-To get the matching direnv `.envrc` snippet use  `./envrc-go-go <version>`s
+To get the matching direnv `.envrc` snippet use  `./envrc-go-go <version>`.
 
+## Installing python versions
 
+To minimize startup time for opening a shell no Python environment
+is established by default.
 
+To install versions of python use `./install-pyenv` which installs
+pyenv and two recent minor versions of python.
+
+To install another version of python use
+`pyenv install -l` to lists available versions and
+`pyenv install <version>` to install said version.
+
+To get the matching direnv `.envrc` snippet use `./envrc-pyenv`. 
+This also has a tip on how to manage the python version for 
+a certain dir.  
