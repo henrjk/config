@@ -67,6 +67,24 @@ Create a `~/.gituser` file for the right user:
   signingkey=7C60sD5D6
 ```
 
+By default git is configured via environment variable `GIT_CONFIG_GLOBAL` to read its config from `~/.config/henrjk/git/.gitconfig-global`.
+This can be used to configure different user info, for example:
+
+```config
+[include]
+  ; open source related user
+  path = ~/.gituser
+
+[includeIf "gitdir:~/code/work/"]
+    path = ~/code/work/.gituser
+
+[includeIf "gitdir:~/Documents/"]
+    path = ~/code/work/.gituser
+
+[include]
+  path = ~/.gitconfig
+```
+
 # SSH Agent
 
 On MacOS, create the following `.ssh/config`:

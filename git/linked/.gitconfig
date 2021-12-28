@@ -1,6 +1,7 @@
-[include]
-  path = .gituser
+# user related configs should be in git/.gitconfig-global
+
 [alias]
+  ac = !git add -u && git commit
   co = checkout
   ct = checkout --track
   ci = commit
@@ -11,6 +12,7 @@
   fp = fetch --prune
   hist = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue) <%an>%Creset' --abbrev-commit
   today = log --since=midnight --author=\"Michael Sauter\" --oneline --color
+  lgr = log --oneline --decorate -7
   contributors = shortlog -s -n -e
   amend = commit --amend
   un-amend = reset --soft HEAD@{1}
@@ -20,15 +22,29 @@
   cs = commit --signoff # Signed-off-by line for commits
   cleanup = "!git branch --merged | grep -v 'master' | xargs -n 1 git branch -d"
 [core]
+	abbrev = 8
   excludesfile = ~/.gitignore
   editor = nvim
 [credential]
   helper = osxkeychain
 [color]
   ui = true
+[log]
+	abbrevcommit = yes
 [push]
   default = current
 [pull]
   default = current
 [diff]
 	noprefix = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

@@ -1,0 +1,6 @@
+[include]
+  path = ~/.gituser
+
+[include]
+  path = ~/.gitconfig
+
