@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -eu # exit on error
+
+which go || brew install go
+
+echo "Snippet already in zsh/sourced/go.zsh:"
+echo "---"
+cat zsh/sourced/go.zsh
+echo "---"
+echo "Source it or open a new terminal"

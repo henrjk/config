@@ -1,0 +1,44 @@
+#!/bin/bash
+
+#
+# Creates envrc snippet for go versions installed with install-go-go
+#
+set -e # exit on error
+
+usage_and_exit() {
+cat << USAGE >&2
+Usage example: $0 <version>
+
+Example: $0 1.13.5
+File https://dl.google.com/go/go<version> must be listed.
+
+See https://golang.org/dl/ for versions that can be downloaded.
+USAGE
+exit 1
+}
+
+GO_VERSION=$1
+
+if [ -z "$GO_VERSION" ]; then
+    echo "ERROR: missing go version number"
+    usage_and_exit
+fi
+
+shift
+if [ "$#" -gt 0 ]; then
+    echo "ERROR: extra parameters not recognized."
+    usage_and_exit
+fi
+
+if ! which -s "go$GO_VERSION" ; then
+    echo "ERROR: "go$GO_VERSION" not in path. Expected to be installed with install-go-go"
+    exit 2
+fi
+
+# see also https://dev.to/shihanng/managing-go-versions-with-direnv-19mb
+cat << ENVRC_SNIPPET
+# -- snippet to add into an .envrc file follows
+# go ${GO_VERSION}
+export GOROOT="$(go$GO_VERSION env GOROOT)"
+PATH_add "$(go$GO_VERSION env GOROOT)/bin"
+ENVRC_SNIPPET
