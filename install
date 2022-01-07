@@ -16,9 +16,8 @@ if [[ $(uname) = 'Darwin' ]]; then
   export HOMEBREW_NO_AUTO_UPDATE=1 # switches of updating after each install below.
 
 
-  which git || brew install git
-
-  which git-lfs || brew install git-lfs
+  # we need a recent version for GIT_CONFIG_GLOBAL to be support 
+  brew install git git-lfs
 
   # tig - text-mode interface for Git - use 'h' to get help
   which tig || brew install tig
