@@ -29,6 +29,37 @@ if [[ $(uname) = 'Darwin' ]]; then
   # ngrok - tunnel local ports to public URLs and inspect traffic
   which ngrok || brew install ngrok
 
+  # Removes large or troublesome blobs like git-filter-branch does, but faster. And written in Scala
+  # which bfg || brew install bfg
+  
+  # --- Potentially still relevant tools: ---
+
+  # autoconf - GNU: Automatic configure script builder https://www.gnu.org/software/autoconf/
+  # libusb-compat - Library for USB device access https://libusb.info/
+  # httpie - As easy as /aitch-tee-tee-pie/ 🥧 Modern, user-friendly command-line HTTP client for the API era. JSON support, colors, sessions, downloads, plugins & more.
+  # hugo - A Fast and Flexible Static Site Generator built with love by bep, spf13 and friends in Go.
+  # p11-kit - This is an effort to use and promote PKCS#11 as glue between crypto libraries and security applications on the open source desktop. https://p11-glue.github.io/p11-glue/index.html
+  # pkg-config - Manage compile and link flags for libraries
+  # pipx - Install and Run Python Applications in Isolated Environments
+  # rbenv - Manage your app's Ruby environment
+  # ruby-build - part of rbenv: ruby-build is a command-line utility that makes it easy to install virtually any version of Ruby, from source.
+  # rbenv-default-gems - Automatically install gems every time you install a new version of Ruby
+  # tmate - Instant terminal sharing see https://tmate.io/
+  # utf8proc - utf8proc is a small, clean C library that provides Unicode normalization, case-folding, and other operations for data in the UTF-8 encoding, supporting Unicode version 14.  https://juliastrings.github.io/utf8proc/
+  # watchman - Watches files and records, or triggers actions, when they change. (facebook)
+
+  # --- Less likely to be still relevant - but still candidates ---
+
+  # reattach-to-user-namespace - Notes and workarounds for accessing the Mac OS X pasteboard in tmux sessions
+  # msgpack - Library for a binary-based efficient data interchange format
+  # oniguruma - regex stuff - perhaps being hacked
+  # pandoc - Swiss-army knife of markup format conversion
+
+
+
+
+
+
 
 else
   echo "NYI: ! Remember to update this install script to installing extra tools on this platform"
