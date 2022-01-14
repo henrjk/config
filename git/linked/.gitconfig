@@ -11,8 +11,13 @@
   pr = pull --rebase
   fp = fetch --prune
   hist = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue) <%an>%Creset' --abbrev-commit
-  today = log --since=midnight --author=\"Michael Sauter\" --oneline --color
-  lgr = log --oneline --decorate -7
+  hrme = log --since=\"10 days\" --author=\"Henrich Kr.*mer\" --oneline --color
+  hr = log --since=\"10 days\" --oneline --color
+  today = log --since=midnight --oneline --color
+  todayme = log --since=midnight --author=\"Henrich Kr.*mer\" --oneline --color
+	lgr = log --oneline --decorate -7
+	lg1 = log --graph --abbrev-commit --decorate --date relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
   contributors = shortlog -s -n -e
   amend = commit --amend
   un-amend = reset --soft HEAD@{1}
@@ -21,6 +26,8 @@
   ts = tag --sign # GPG signing for tags
   cs = commit --signoff # Signed-off-by line for commits
   cleanup = "!git branch --merged | grep -v 'master' | xargs -n 1 git branch -d"
+[grep]
+  extendedRegexp = true
 [core]
 	abbrev = 8
   excludesfile = ~/.gitignore
@@ -39,9 +46,9 @@
 	noprefix = true
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
