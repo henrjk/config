@@ -31,7 +31,11 @@ if [[ $(uname) = 'Darwin' ]]; then
 
   # Removes large or troublesome blobs like git-filter-branch does, but faster. And written in Scala
   # which bfg || brew install bfg
-  
+
+  # --- New tools proposed by someone or recenty discovered
+  # - aquasecurity/trivy/trivy : https://aquasecurity.github.io/trivy/v0.22.0/getting-started/installation/
+
+
   # --- Potentially still relevant tools: ---
 
   # autoconf - GNU: Automatic configure script builder https://www.gnu.org/software/autoconf/
