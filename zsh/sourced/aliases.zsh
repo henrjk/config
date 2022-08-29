@@ -8,6 +8,8 @@ alias archdockervalues='echo "docker desktop architecture values:\nlinux/aarch64
 
 # candidates for alias
 
+# docker run --rm --entrypoint=bash -it image-name
+
 # docker image inspect postgres:12 -f '{{.Os}}/{{.Architecture}}'
 # linux/arm64
 # → docker image inspect atlassian/bitbucket:7.6.5 -f '{{.Os}}/{{.Architecture}}'
@@ -21,4 +23,15 @@ gpip3(){
 
 gpip2(){
    PIP_REQUIRE_VIRTUALENV="0" pip2 "$@"
+}
+
+# https://stackoverflow.com/a/30029855
+listening() {
+    if [ $# -eq 0 ]; then
+        lsof -iTCP -sTCP:LISTEN -n -P
+    elif [ $# -eq 1 ]; then
+        lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
+    else
+        echo "Usage: listening [pattern]"
+    fi
 }
