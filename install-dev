@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Packages
+set -eu
+
+# Assumes you already ran the install script
+
+# If things don't work https://binx.io/blog/2019/04/12/installing-pyenv-on-macos/ could be valuable.
+
+if [[ $(uname) = 'Darwin' ]]; then
+  if ! brew doctor check_xcode_license_approved check_xcode_minimum_version check_xcode_prefix_exists check_xcode_select_path check_xcode_up_to_date; then
+    echo "A matching xcode CLI installation is needed for brew packages which build the binaries." >&2
+    echo "Goto https://developer.apple.com/download/all/ and download latest CLI tools and install them."  >&2
+    echo "More details see [Xcode 13.1 will gets stuck on iOS Monterey/ New 2021 pro](https://developer.apple.com/forums/thread/693238?answerId=692887022#692887022)"  >&2
+    exit 1
+  fi
+elif [[ $(uname) = 'Linux' ]]; then
+  # sudo apt-get update; sudo apt-get install make build-essential libssl-dev zlib1g-dev \
+  #   libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+  #   libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+  echo "NYI: Remember to update this install script tools on Linux" >&2
+  exit 1
+else
+  echo "NYI: Remember to update this install script tools on this platform uname=$(uname)" >&2
+  exit 1
+fi
