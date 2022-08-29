@@ -15,7 +15,8 @@
   hr = log --since=\"10 days\" --oneline --color
   today = log --since=midnight --oneline --color
   todayme = log --since=midnight --author=\"Henrich Kr.*mer\" --oneline --color
-	lgr = log --oneline --decorate -7
+	lgr = log --oneline --decorate -13
+	lgrm = log --oneline --decorate -27
 	lg1 = log --graph --abbrev-commit --decorate --date relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
   contributors = shortlog -s -n -e
