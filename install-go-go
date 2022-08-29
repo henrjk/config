@@ -40,8 +40,14 @@ if ! which go; then
   exit 2
 fi
 
-go get "golang.org/dl/go$GO_VERSION"
-"$(go env GOPATH)/bin/go$GO_VERSION" download  # goes to ~/sdk/go$GO_VERSION
+# This was implemented with go 1.13
+# go get "golang.org/dl/go$GO_VERSION"
+# "$(go env GOPATH)/bin/go$GO_VERSION" download  # goes to ~/sdk/go$GO_VERSION
+
+go install "golang.org/dl/go$GO_VERSION@latest"
+"go$GO_VERSION" download
+# "$(go env GOPATH)/bin/go$GO_VERSION" download  # goes to ~/sdk/go$GO_VERSION , bin at ~/go/bin/go$GO_VERSION
+
 
 echo "Create the matching direnv .envrc snippet with:"
 echo ./envrc-go-go "$GO_VERSION"
